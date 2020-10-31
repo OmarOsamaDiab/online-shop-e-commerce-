@@ -1,0 +1,22 @@
+<%- include('./parts/header') %> <%- include('./parts/body') %>
+<div class="container text-center">
+  <br />
+  <br />
+  <h3>Login</h3>
+  <br />
+  <form action="/login" method="POST">
+    <input type="email" class="form-control" name="email" placeholder="Enter your E-mail" />
+    <br />
+    <input type="password" class="form-control" name="password" placeholder="Enter your password" />
+    <br />
+    <input type="submit" class="btn btn-primary" value="Enter" />
+  </form>
+  <br />
+  <br />
+  <% if (authError) { %>
+  <p class="alert alert-danger"><%= authError%></p>
+  <%}%> <% for(let e of validationErrors) { %>
+  <p class="alert alert-danger"><%= e.msg %></p>
+  <%}%>
+</div>
+<%-include('./parts/footer') %>

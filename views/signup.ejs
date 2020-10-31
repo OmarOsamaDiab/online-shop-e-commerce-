@@ -1,0 +1,44 @@
+<%- include('./parts/header') %> <%- include('./parts/body') %>
+<br />
+<div class="container text-center">
+  <h3>Create new Account</h3>
+  <form action="/signup" method="POST">
+    <input
+      type="text"
+      class="form-control"
+      name="username"
+      placeholder="Enter your User name"
+    />
+    <br />
+    <input
+      type="email"
+      class="form-control"
+      name="email"
+      placeholder="Enter your E-mail"
+    />
+    <br />
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      placeholder="Enter your password"
+    />
+    <br />
+    <input
+      type="password"
+      class="form-control"
+      name="confirmPassword"
+      placeholder="confirm Password"
+    />
+    <br />
+    <input type="submit" class="btn btn-primary" value="Create Account" />
+  </form>
+  <br />
+  <%if (authError) {%>
+  <p class="alert alert-danger"><%= authError%></p>
+  <% } %> <% for(let e of validationErrors) { %>
+  <p class="alert alert-danger"><%= e.msg %></p>
+  <%}%>
+  <div>Already have Account ? <a href="/login"> Login </a></div>
+</div>
+<%-include('./parts/footer') %>
