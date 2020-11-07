@@ -17,7 +17,6 @@
                     <form action="/cart" method="POST">
                         <p>quantity:</p>
                         <input type="number" name="amount" class="form-control"></br>
-                        <input type="submit" value="add to cart" class="btn btn-primary">
                         <input type="hidden" name="redirectTo" value="/product/<%= product._id%>">
                         <input type="hidden" name="price" value="<%= product.price%>">
                         <input type="hidden" name="productId" value="<%= product._id%>">

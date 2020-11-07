@@ -20,8 +20,8 @@ exports.addItem = async (req, res, next) => {
             await Cart.addNewItem({
                 productId: req.body.productId,
                 userId: req.session.userId,
-                amount: req.body.amount,
-                price: req.body.price,
+                amount: +req.body.amount,
+                price: +req.body.price,
                 name: req.body.name,
                 timeStamp: new Date()
             })
@@ -33,7 +33,6 @@ exports.addItem = async (req, res, next) => {
     } catch (err) {
         console.log(err.message)
     }
-
 }
 exports.saveCart = async (req, res, next) => {
     try {
@@ -61,5 +60,14 @@ exports.deleteCart = async (req, res, next) => {
         res.redirect('/cart')
     } catch (err) {
         console.log(err)
+    }
+}
+
+exports.deleteAll = async (req, res, next) => {
+    try {
+        await Cart.deleteAll(req.body.userId)
+        res.redirect('/cart')
+    } catch (e) {
+        console.log(e)
     }
 }

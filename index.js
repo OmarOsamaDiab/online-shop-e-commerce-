@@ -6,11 +6,12 @@ const session = require("express-session");
 const StoreSession = require("connect-mongodb-session")(session);
 const flash = require("connect-flash");
 
-const DB_URL = "mongodb://localhost:27017/onlineShop";
-const homeRouter = require("./routes/home.routes");
-const productRouter = require("./routes/product.routes");
-const authRouter = require("./routes/auth.routes");
+const DB_URL = "mongodb://localhost:27017/onlineShop"
+const homeRouter = require("./routes/home.routes")
+const productRouter = require("./routes/product.routes")
+const authRouter = require("./routes/auth.routes")
 const cartRouter = require('./routes/cart.routes')
+const orderRouter = require('./routes/order.routes')
 
 const STORE = new StoreSession({
   uri: DB_URL,
@@ -36,5 +37,5 @@ app.use(authRouter);
 app.use("/", homeRouter);
 app.use("/product", productRouter);
 app.use('/cart', cartRouter)
-
+app.use('/order', orderRouter)
 app.listen(5000, () => console.log("listening to port 5000"));

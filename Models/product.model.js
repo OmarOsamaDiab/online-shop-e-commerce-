@@ -8,12 +8,13 @@ const prodSchema = mongoose.Schema({
   category: String,
 });
 const Product = mongoose.model("product", prodSchema);
+
 exports.getAllProducts = async (category) => {
   await mongoose.connect(DB_URL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   });
-  const products = (category) ? await Product.find({ category }) : await Product.find()
+  const products = (category) ? await Product.find({ category: { $regex: category, $options: 'i' } }) : await Product.find()
   await mongoose.disconnect();
   return products;
 };

@@ -14,7 +14,7 @@ router.post('/',
     cartControllers.addItem
 );
 
-router.put('/save', auth.isAuth,
+router.post('/save', auth.isAuth,
     check('amount')
         .not().isEmpty()
         .withMessage('amount is required')
@@ -22,6 +22,6 @@ router.put('/save', auth.isAuth,
         .withMessage('amount must be positive'),
     cartControllers.saveCart);
 
-router.delete('/delete', auth.isAuth, cartControllers.deleteCart)
-
+router.post('/delete', auth.isAuth, cartControllers.deleteCart)
+router.post('/deleteAll', auth.isAuth, cartControllers.deleteAll)
 module.exports = router;

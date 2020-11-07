@@ -22,8 +22,19 @@ exports.addNewItem = async data => {
         useUnifiedTopology: true,
         useNewUrlParser: true,
     });
-    const item = new CartItem(data)
-    await item.save()
+    const { userId, productId } = data
+    const [cart] = await CartItem.find({ userId, productId })
+    let item;
+    if (cart) {
+        const { _id } = cart
+        console.log(cart)
+        data.amount += +cart.amount
+        item = await CartItem.updateOne({ _id }, data)
+    }
+    else {
+        item = new CartItem(data)
+        await item.save()
+    }
     await mongoose.disconnect();
     return item
 }
@@ -42,3 +53,11 @@ exports.deleteCart = async (_id) => {
     });
     await CartItem.deleteOne({ _id })
 }
+exports.deleteAll = async (userId) => {
+    await mongoose.connect(DB_URL, {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+    });
+    await CartItem.deleteMany({ userId })
+}
+exports.CartItem = CartItem
